@@ -16,3 +16,30 @@ string Card::render(int line){
             return " ";
     }
 }
+int getAttack(void);
+        int getDefense(void);
+        bool isExhausted(void);
+        void unExhaust(void)
+string Card::getName(){
+    return name;   
+}
+
+int Card::getManaCost(){
+    return manaCost;   
+}
+
+int Card::getAttack(){
+    return attack;
+}
+
+int Card::getDefense(){
+    return defense;
+}
+
+bool Card::isExhausted(){   //DOUBLE CHECK
+    return true;   
+}
+
+void Card::unExhaus(){      //DOUBLE CHECK
+    return false;
+}

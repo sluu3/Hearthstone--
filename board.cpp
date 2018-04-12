@@ -25,8 +25,48 @@ void Board::draw(int num){
     }
 }
 
-void playCardFromHand(int indx){
-        
+void Board::playCardFromHand(int indx){
+    Card* temp = hand[indx];
+    field.push_back(hand[indx]);
+    mana -= temp->getManaCost();
+}
+
+Card* Board::getCardOnField(int indx){
+    return field[indx];
+}
+
+Card* Board::getCardInHand(int indx){
+    return hand[indx];
+}
+
+int Board::getHP(){
+    return hp;   
+}
+
+int Board::getHandSize(){
+    return hand.size();   
+}
+
+int Board::getFieldSize(){
+    return field.size();   
+}
+
+int Board::getMana(){
+    return mana;   
+}
+
+void Board::setMana(int m){
+    mana = m;
+}
+
+void Board::discardCardFromField(int indx){
+    Card* temp = field[indx];
+    discard.push_back(temp);
+    field.erase(field.begin() + indx);  //SHOULD ERASE CARD AT INDEX... DOUBLE CHECK
+}
+
+void Board::unExhaustField(){
+    
 }
 
 void Board::shuffleDeck(void){
