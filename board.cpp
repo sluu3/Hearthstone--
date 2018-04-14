@@ -66,7 +66,9 @@ void Board::discardCardFromField(int indx){
 }
 
 void Board::unExhaustField(){
-    
+    for (int i = 0; i < field.size(); i++){
+        field.unExhaust();   
+    }
 }
 
 void Board::shuffleDeck(void){

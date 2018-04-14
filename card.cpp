@@ -40,6 +40,6 @@ bool Card::isExhausted(){   //DOUBLE CHECK
     return true;   
 }
 
-void Card::unExhaus(){      //DOUBLE CHECK
+void Card::unExhaust(){      //DOUBLE CHECK
     return false;
 }
