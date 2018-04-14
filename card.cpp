@@ -16,10 +16,7 @@ string Card::render(int line){
             return " ";
     }
 }
-int getAttack(void);
-        int getDefense(void);
-        bool isExhausted(void);
-        void unExhaust(void)
+
 string Card::getName(){
     return name;   
 }
@@ -37,9 +34,11 @@ int Card::getDefense(){
 }
 
 bool Card::isExhausted(){   //DOUBLE CHECK
-    return true;   
+    exhausted = true;
+    return exhausted;   
 }
 
 void Card::unExhaust(){      //DOUBLE CHECK
-    return false;
+    exhausted = false;
+    return exhausted; 
 }
