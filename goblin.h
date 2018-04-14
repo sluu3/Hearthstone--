@@ -7,7 +7,7 @@
 using namespace std;
 
 class Goblin : public Card {
-    private:
+   // private:
     
     public:
     Goblin(string, int, int, int);
