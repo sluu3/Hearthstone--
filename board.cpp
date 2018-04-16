@@ -9,9 +9,12 @@ Board::Board(){
 }
 
 void Board::addToDeckList(Card* c){
-    if(deck.size() <= 21){
+    if(deck.size() < 21){
         deck.push_back(c);   
     }
+}
+int Board::getDeck(){
+    return deck.size();   
 }
 
 void Board::draw(int num){
@@ -43,6 +46,10 @@ int Board::getHP(){
     return hp;   
 }
 
+void Board::setHP(int n){
+    hp = n;   
+}
+
 int Board::getHandSize(){
     return hand.size();   
 }
@@ -67,7 +74,7 @@ void Board::discardCardFromField(int indx){
 
 void Board::unExhaustField(){
     for (int i = 0; i < field.size(); i++){
-        field.unExhaust();   
+        field[i]->unExhaust();  
     }
 }
 
@@ -83,7 +90,6 @@ void Board::shuffleDeck(void){
         deck[idx2] = temp;
     }
 }
-
 
 void Board::renderMana(void){
     cout << "MANA: ";

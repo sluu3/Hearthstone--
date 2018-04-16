@@ -16,10 +16,7 @@ string Goblin::render(int line){
     }
 }
 
-Goblin::Goblin(string name, int manaCost, int attack, int defense){ 
-    name = "Goblin";
-    manaCost = 1;
-    attack = 200;
-    defense = 100;
+Goblin::Goblin(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
+    
 }
 

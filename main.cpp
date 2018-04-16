@@ -3,6 +3,11 @@
 #include <unistd.h>
 #include "board.h"
 #include "goblin.h"
+#include "bear.h"
+#include "frog.h"
+#include "giraffe.h"
+#include "hedgehog.h"
+#include "rabbit.h"
 #include "card.h"
 
 using namespace std;
@@ -11,27 +16,58 @@ void getOpponentAction(Board&, Board&);
 void renderBoard(Board&, Board&);
 
 int main(int argc, char * arv[]){
-    int turn;
-    Goblin("goblin", 1, 200, 100);
+    int turn, c;
     srand(time(0));
     
     // Set up Player board
-    Board pb;
+    Board pb;  
     // Create player deck and draw initial hand here:
-
+    Goblin g("goblin", 1,200,100);
+    Bear b("bear", 6,500,600);
+    Frog f("frog", 1,100,200);
+    Giraffe gi("giraffe", 5,400,500);
+    Hedgehog h("hedgehog", 2,300,100);
+    Rabbit r("rabbit", 2, 200,200);
+    for (int i = 0; i < 20; i++){
+        c = rand() % 7;
+        Card* cards;
+        switch(c){
+            case 0: cards = &g;
+                break;
+            case 1: cards = &b;
+                break;
+            case 2: cards = &f;
+                break;
+            case 3: cards = &gi;
+                break;
+            case 4: cards = &h;
+                break;
+            case 5: cards = &r;
+                break;
+        }
+        pb.addToDeckList(cards); 
+    }
+    
+    pb.draw(5);
+    cout << pb.getDeck()<<endl;
+    
+    pb.renderHand();
+    
+    
     // Set up opponent board
     Board ob;
     // Create opponent deck and draw initial hand here:
-    
+    /*
     while(pb.getHP() > 0 && ob.getHP() > 0){
         // Take turns here:
 
         turn++;
     }
-    
+    */
     
     return 0;
 }
+
 
 void renderBoard(Board & pb, Board & ob){
     // Render opponent field

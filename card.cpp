@@ -17,6 +17,9 @@ string Card::render(int line){
     }
 }
 
+Card::Card(string name, int manaCost, int attack, int defense){
+}
+
 string Card::getName(){
     return name;   
 }
@@ -40,5 +43,4 @@ bool Card::isExhausted(){   //DOUBLE CHECK
 
 void Card::unExhaust(){      //DOUBLE CHECK
     exhausted = false;
-    return exhausted; 
 }

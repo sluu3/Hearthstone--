@@ -53,6 +53,7 @@ class Board{
          * cards to the deck before the start of the game.
          */
         void addToDeckList(Card*);
+        int getDeck(void);
         
         /* draw
          *
