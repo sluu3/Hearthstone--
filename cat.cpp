@@ -16,6 +16,6 @@ string Cat::render(int line){
     }
 }
 
-Cat::Cat(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-  
+Cat::Cat(void):Card("Cat", 2, 300, 100){
+    return;
 }
