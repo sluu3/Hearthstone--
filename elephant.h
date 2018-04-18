@@ -10,7 +10,7 @@ class Elephant : public Card {
    // private:
     
     public:
-    Elephant(string, int, int, int);
+    Elephant(void);
     virtual string render(int);    
 };
 
