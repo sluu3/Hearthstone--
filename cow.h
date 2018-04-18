@@ -10,7 +10,7 @@ class Cow : public Card {
    // private:
     
     public:
-    Cow(string, int, int, int);
+    Cow(void);
     virtual string render(int);    
 };
 
