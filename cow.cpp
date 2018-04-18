@@ -16,6 +16,6 @@ string Cow::render(int line){
     }
 }
 
-Cow::Cow(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-  
+Cow::Cow(void):Card("Cow", 3, 300, 400){
+    return;
 }
