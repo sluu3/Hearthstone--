@@ -16,6 +16,6 @@ string Dog::render(int line){
     }
 }
 
-Dog::Dog(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-  
+Dog::Dog(void):Card("Dog", 3, 400, 400){
+    return;
 }
