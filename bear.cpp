@@ -16,6 +16,6 @@ string Bear::render(int line){
     }
 }
 
-Bear::Bear(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-    
+Bear::Bear(void):Card("Bear", 6, 500, 600){
+    return;
 }
