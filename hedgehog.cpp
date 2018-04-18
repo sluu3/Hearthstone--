@@ -16,6 +16,6 @@ string Hedgehog::render(int line){
     }
 }
 
-Hedgehog::Hedgehog(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-    
+Hedgehog::Hedgehog(void):Card("Hedgehog", 2, 300, 100){
+    return;
 }
