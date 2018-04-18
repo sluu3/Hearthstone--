@@ -16,6 +16,6 @@ string Bear::render(int line){
     }
 }
 
-Bear::Bear(void):Card("Bear", 6, 500, 600){
-    return;
+Bear::Bear(void):Card("Bear", 1, 200, 100){
+	return;
 }

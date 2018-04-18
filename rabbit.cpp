@@ -16,6 +16,6 @@ string Rabbit::render(int line){
     }
 }
 
-Rabbit::Rabbit(void):Card("Rabbit", 2, 200, 200){
-    return;
+Rabbit::Rabbit(void):Card("Rabbit", 1, 200, 100){
+	return;
 }

@@ -16,6 +16,6 @@ string Giraffe::render(int line){
     }
 }
 
-Giraffe::Giraffe(void):Card("Giraffe", 5, 400, 500){
-    return;
+Giraffe::Giraffe(void):Card("Giraffe", 1, 200, 100){
+	return;
 }

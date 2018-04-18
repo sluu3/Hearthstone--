@@ -54,6 +54,7 @@ class Board{
          */
         void addToDeckList(Card*);
         int getDeck(void);
+        Card* showHand();
         
         /* draw
          *

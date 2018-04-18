@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include <stdlib.h>
 #include <unistd.h>
 #include "board.h"
@@ -22,42 +23,32 @@ int main(int argc, char * arv[]){
     // Set up Player board
     Board pb;  
     // Create player deck and draw initial hand here:
-    Goblin g("goblin", 1,200,100);
-    Bear b("bear", 6,500,600);
-    Frog f("frog", 1,100,200);
-    Giraffe gi("giraffe", 5,400,500);
-    Hedgehog h("hedgehog", 2,300,100);
-    Rabbit r("rabbit", 2, 200,200);
-    Cow c("cow", 3,300,400);
-    Pig p("pig", 3,400,300);
-    Dog d("dog", 3,400,400);
-    Elephant e("elephant", 8,800,800);
-    Cat ca("cat", 2,300,100);
+     
     for (int i = 0; i < 20; i++){
-        c = rand() % 7;
+        c = rand() % 6;
         Card* cards;
         switch(c){
-            case 0: cards = &g;
+            case 0: cards = new Goblin();
                 break;
-            case 1: cards = &b;
+            case 1: cards = new Bear();
                 break;
-            case 2: cards = &f;
+            case 2: cards = new Frog();
                 break;
-            case 3: cards = &gi;
+            case 3: cards = new Giraffe();
                 break;
-            case 4: cards = &h;
+            case 4: cards = new Hedgehog();
                 break;
-            case 5: cards = &r;
+            case 5: cards = new Rabbit();
+                break;
+            default: cards = new Goblin();
                 break;
         }
         pb.addToDeckList(cards); 
     }
     
-    pb.draw(5);
-    cout << pb.getDeck()<<endl;
-    
+    pb.draw(2);
     pb.renderHand();
-    
+      
     
     // Set up opponent board
     Board ob;

@@ -16,6 +16,6 @@ string Hedgehog::render(int line){
     }
 }
 
-Hedgehog::Hedgehog(void):Card("Hedgehog", 2, 300, 100){
-    return;
+Hedgehog::Hedgehog(void):Card("Hedgehog", 1, 200, 100){
+	return;
 }

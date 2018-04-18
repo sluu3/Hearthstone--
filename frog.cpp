@@ -16,6 +16,6 @@ string Frog::render(int line){
     }
 }
 
-Frog::Frog(void):Card("Frog", 1, 100, 200){
-    return;
+Frog::Frog(void):Card("Frog", 1, 200, 100){
+	return;
 }

@@ -17,7 +17,11 @@ string Card::render(int line){
     }
 }
 
-Card::Card(string name, int manaCost, int attack, int defense){
+Card::Card(string n, int mc, int atk, int def){
+    name = n;
+    manaCost = mc;
+    attack = atk;
+    defense = def;
 }
 
 string Card::getName(){

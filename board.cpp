@@ -17,14 +17,18 @@ int Board::getDeck(){
     return deck.size();   
 }
 
+Card* Board::showHand(){
+    for (int i = 0; i < hand.size(); i++){
+        cout << "MY NAME: ";
+        cout << hand[i]->getName() << endl;   
+    }
+}
+
 void Board::draw(int num){
-    Card* temp; 
-    int j = 20;
+    int j = deck.size() - 1;
     for(int i = 0; i < num; i++){
-        temp = deck[j];
+        hand.push_back(deck[j]);
         j--;
-        deck.pop_back();
-        hand.push_back(temp);       
     }
 }
 
