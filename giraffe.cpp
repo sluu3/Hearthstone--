@@ -16,6 +16,6 @@ string Giraffe::render(int line){
     }
 }
 
-Giraffe::Giraffe(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-   
+Giraffe::Giraffe(void):Card("Giraffe", 5, 400, 500){
+    return;
 }
