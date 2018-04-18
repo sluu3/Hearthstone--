@@ -10,7 +10,7 @@ class Frog : public Card {
    // private:
     
     public:
-    Frog(string, int, int, int);
+    Frog(void);
     virtual string render(int);    
 };
 
