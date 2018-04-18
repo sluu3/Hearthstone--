@@ -16,6 +16,7 @@ string Goblin::render(int line){
     }
 }
 
+
 Goblin::Goblin(void):Card("Goblin", 1, 200, 100){
-    return;
+	//return;
 }
