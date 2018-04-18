@@ -10,7 +10,7 @@ class Bear : public Card {
    // private:
     
     public:
-    Bear(string, int, int, int);
+    Bear(void);
     virtual string render(int);    
 };
 
