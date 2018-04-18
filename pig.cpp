@@ -16,6 +16,6 @@ string Pig::render(int line){
     }
 }
 
-Pig::Pig(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-  
+Pig::Pig(void):Card("Pig", 3, 400, 300){
+    return;
 }
