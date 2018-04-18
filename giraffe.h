@@ -10,7 +10,7 @@ class Giraffe : public Card {
    // private:
     
     public:
-    Giraffe(string, int, int, int);
+    Giraffe(void);
     virtual string render(int);    
 };
 
