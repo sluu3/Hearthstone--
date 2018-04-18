@@ -25,7 +25,7 @@ int main(int argc, char * arv[]){
     // Create player deck and draw initial hand here:
      
     for (int i = 0; i < 20; i++){
-        c = rand() % 6;
+        c = rand() % 11;
         Card* cards;
         switch(c){
             case 0: cards = new Goblin();
@@ -39,6 +39,16 @@ int main(int argc, char * arv[]){
             case 4: cards = new Hedgehog();
                 break;
             case 5: cards = new Rabbit();
+                break;
+            case 6: cards = new Elephant();
+                break;
+            case 7: cards = new Cat();
+                break;
+            case 8: cards = new Dog();
+                break;
+            case 9: cards = new Pig();
+                break;
+            case 10: cards = new Cow();
                 break;
             default: cards = new Goblin();
                 break;
