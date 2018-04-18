@@ -10,7 +10,7 @@ class Hedgehog : public Card {
    // private:
     
     public:
-    Hedgehog(string, int, int, int);
+    Hedgehog(void);
     virtual string render(int);    
 };
 
