@@ -16,6 +16,6 @@ string Rabbit::render(int line){
     }
 }
 
-Rabbit::Rabbit(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-  
+Rabbit::Rabbit(void):Card("Rabbit", 2, 200, 200){
+    return;
 }
