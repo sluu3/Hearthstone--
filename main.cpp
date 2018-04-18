@@ -28,6 +28,11 @@ int main(int argc, char * arv[]){
     Giraffe gi("giraffe", 5,400,500);
     Hedgehog h("hedgehog", 2,300,100);
     Rabbit r("rabbit", 2, 200,200);
+    Cow c("cow", 3,300,400);
+    Pig p("pig", 3,400,300);
+    Dog d("dog", 3,400,400);
+    Elephant e("elephant", 8,800,800);
+    Cat ca("cat", 2,300,100);
     for (int i = 0; i < 20; i++){
         c = rand() % 7;
         Card* cards;
