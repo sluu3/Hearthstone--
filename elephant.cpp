@@ -16,6 +16,6 @@ string Elephant::render(int line){
     }
 }
 
-Elephant::Elephant(string name, int manaCost, int attack, int defense):Card(name, manaCost, attack, defense){ 
-  
+Elephant::Elephant(void):Card("Elephant", 8, 800, 800){
+    return;
 }
