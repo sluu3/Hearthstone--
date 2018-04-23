@@ -20,9 +20,10 @@ using namespace std;
 
 void getOpponentAction(Board&, Board&);
 void renderBoard(Board&, Board&);
+void randomCards(Card*&, int);
 
 int main(int argc, char * arv[]){
-    int turn, c;
+    int turn, c, r;
     srand(time(0));
     
     // Set up Player board
@@ -32,7 +33,38 @@ int main(int argc, char * arv[]){
     for (int i = 0; i < 20; i++){
         c = rand() % 11;
         Card* cards;
-        switch(c){
+        randomCards(cards, c);
+        pb.addToDeckList(cards); 
+    }
+    pb.draw(5);
+      
+    
+    // Set up opponent board
+    Board ob;
+    // Create opponent deck and draw initial hand here:
+	
+	for (int i = 0; i < 20; i++){
+		r = rand() % 11;
+		Card* obCards;
+		randomCards(obCards, r);
+		ob.addToDeckList(obCards);
+	}
+	ob.draw(5);
+	
+	renderBoard(pb, ob);
+    /*
+    while(pb.getHP() > 0 && ob.getHP() > 0){
+        // Take turns here:
+
+        turn++;
+    }
+    */
+    
+    return 0;
+}
+
+void randomCards(Card* &cards, int c){
+	switch(c){
             case 0: cards = new Goblin();
                 break;
             case 1: cards = new Bear();
@@ -58,31 +90,12 @@ int main(int argc, char * arv[]){
             default: cards = new Goblin();
                 break;
         }
-        pb.addToDeckList(cards); 
-    }
-    
-    pb.draw(2);
-    pb.renderHand();
-      
-    
-    // Set up opponent board
-    Board ob;
-    // Create opponent deck and draw initial hand here:
-    /*
-    while(pb.getHP() > 0 && ob.getHP() > 0){
-        // Take turns here:
-
-        turn++;
-    }
-    */
-    
-    return 0;
 }
-
 
 void renderBoard(Board & pb, Board & ob){
     // Render opponent field
     ob.renderField();
+	ob.renderHand();
     cout << endl;
     // Render player field
     pb.renderField();
