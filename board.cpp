@@ -6,6 +6,8 @@ using namespace std;
 
 Board::Board(){
     hp = 2000;
+    mana = 0;
+    maxMana = 0;
 }
 
 void Board::addToDeckList(Card* c){
@@ -19,8 +21,14 @@ int Board::getDeck(){
 
 Card* Board::showHand(){
     for (int i = 0; i < hand.size(); i++){
-        cout << "MY NAME: ";
-        cout << hand[i]->getName() << endl;   
+        cout << i << ": " << hand[i]->getName() << "(" << hand[i]->getManaCost() << ")" << endl;
+    }
+}
+
+Card* Board::showField() {
+    cout << endl;
+    for (int i = 0; i < getFieldSize(); i++){
+        cout << i << ": " << field[i]->getName() << endl;
     }
 }
 
@@ -35,6 +43,7 @@ void Board::draw(int num){
 void Board::playCardFromHand(int indx){
     Card* temp = hand[indx];
     field.push_back(hand[indx]);
+    hand.erase(hand.begin() + indx);
     mana -= temp->getManaCost();
 }
 
@@ -62,12 +71,16 @@ int Board::getFieldSize(){
     return field.size();   
 }
 
-int Board::getMana(){
-    return mana;   
+void Board::setMaxMana(int m) {
+    maxMana = m;
 }
 
-void Board::setMana(int m){
-    mana = m;
+int Board::getMana(){
+    return mana;
+}
+
+void Board::incMana(){
+    mana++;
 }
 
 void Board::discardCardFromField(int indx){
@@ -103,7 +116,7 @@ void Board::renderMana(void){
         else
             cout << "O ";
     }
-        
+
     cout << endl;
 }
 

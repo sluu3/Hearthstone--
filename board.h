@@ -11,8 +11,6 @@ class Board{
         int hp;
         // The amount of mana available to spend.
         int mana;
-        // The max amount of mana available per turn. Should be equal to the current turn.
-        int maxMana;
     
         /* deck
          * 
@@ -38,8 +36,10 @@ class Board{
          * This vector contains pointers to all the cards on the field.
          */
         vector<Card*> field;
+        int maxMana;
     
     public:
+
         /* Constructor for Board
          *
          * This constructor should be used to initalize a player's health 
@@ -55,6 +55,8 @@ class Board{
         void addToDeckList(Card*);
         int getDeck(void);
         Card* showHand();
+        void setMaxMana(int);
+        Card* showField();
         
         /* draw
          *
@@ -121,7 +123,7 @@ class Board{
          *
          * Mutator function for mana.
          */
-        void setMana(int);
+        void incMana(void);
         
         /* discardCardFromField
          *
@@ -159,6 +161,8 @@ class Board{
          * Draws the cards in the field vector to the console.
          */
         void renderField(void);
+
+
 };
 
 

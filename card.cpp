@@ -22,6 +22,7 @@ Card::Card(string n, int mc, int atk, int def){
     manaCost = mc;
     attack = atk;
     defense = def;
+    exhausted = true;
 }
 
 string Card::getName(){
@@ -41,7 +42,6 @@ int Card::getDefense(){
 }
 
 bool Card::isExhausted(){   //DOUBLE CHECK
-    exhausted = true;
     return exhausted;   
 }
 

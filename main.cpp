@@ -1,6 +1,6 @@
 #include <iostream>
 #include <ctime>
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
 #include "board.h"
 #include "goblin.h"
@@ -21,9 +21,11 @@ using namespace std;
 void getOpponentAction(Board&, Board&);
 void renderBoard(Board&, Board&);
 void randomCards(Card*&, int);
+void getPlayerAction(Board&, Board&);
 
 int main(int argc, char * arv[]){
-    int turn, c, r;
+    int c, r, coin, maxMana = 1;
+	bool turn;
     srand(time(0));
     
     // Set up Player board
@@ -37,8 +39,7 @@ int main(int argc, char * arv[]){
         pb.addToDeckList(cards); 
     }
     pb.draw(5);
-      
-    
+
     // Set up opponent board
     Board ob;
     // Create opponent deck and draw initial hand here:
@@ -50,17 +51,78 @@ int main(int argc, char * arv[]){
 		ob.addToDeckList(obCards);
 	}
 	ob.draw(5);
-	
-	renderBoard(pb, ob);
-    /*
-    while(pb.getHP() > 0 && ob.getHP() > 0){
-        // Take turns here:
 
-        turn++;
+	coin = (rand() % 2);
+	if (coin == 0){
+		turn = true;	
+		cout << "You will go first!" << endl;
+	}else{
+		turn = false;
+		cout << "The computer will go first!" << endl;
+	}
+
+
+    while(pb.getHP() > 0 && ob.getHP() > 0){
+	    pb.setMaxMana(maxMana);
+	    ob.setMaxMana(maxMana);
+	    if(turn){
+            pb.incMana();
+            renderBoard(pb, ob);
+            cout << "Your turn!" << endl;
+            getPlayerAction(pb, ob);
+            turn = false;
+            maxMana++;
+        }else{
+            ob.incMana();
+            cout << "Opponents turn!" << endl;
+            getOpponentAction(pb, ob);
+            turn = true;
+        }
     }
-    */
-    
-    return 0;
+
+}
+
+void getPlayerAction(Board& pb, Board& ob){
+	int i, j, attack = 0;
+	cout << endl;
+	while(i != 2) {
+        cout << "0: Play card from hand" << endl << "1: Attack with Creature" << endl << "2: End Turn" << endl;
+        cin >> i;
+        if (i == 0) {
+            pb.showHand();
+            cout << "What card to play?";
+            cin >> j;
+            if (pb.getCardInHand(j)->getManaCost() <= pb.getMana()) {
+                pb.playCardFromHand(j);
+                pb.draw(5 - pb.getHandSize());
+                pb.renderMana();
+            }else{
+                cout << "You don't have enough mana" << endl;
+            }
+            renderBoard(pb, ob);
+        } else if (i == 1) {
+            cout << "Card to attack opponent's creature: ";
+            pb.showField();
+            cin >> j;
+            if (!pb.getCardOnField(j)->isExhausted()) {
+                cout << "Creature to attack: ";
+                ob.showHand();
+                cin >> attack;
+                if (pb.getCardOnField(j)->getAttack() > ob.getCardOnField(attack)->getDefense()) {
+                    cout << pb.getCardOnField(j)->getName() << " attacked the " << ob.getCardOnField(attack)->getName()
+                         << endl;
+                }
+                renderBoard(pb, ob);
+            } else {
+                cout << "This creature is exhausted, pick again." << endl;
+            }
+        } else if (i != 0 && i != 1 && i != 2) {
+            cout << "Invalid choice. Choose again." << endl;
+        }
+    }
+    for (int i = 0; i < pb.getFieldSize(); i++){
+	    pb.getCardOnField(i)->unExhaust();
+	}
 }
 
 void randomCards(Card* &cards, int c){
@@ -94,8 +156,9 @@ void randomCards(Card* &cards, int c){
 
 void renderBoard(Board & pb, Board & ob){
     // Render opponent field
+    ob.renderHand();
     ob.renderField();
-	ob.renderHand();
+
     cout << endl;
     // Render player field
     pb.renderField();
@@ -108,36 +171,43 @@ void renderBoard(Board & pb, Board & ob){
 }
 
 void getOpponentAction(Board & playerBoard, Board & opponentBoard){
-    // Go through hand and play cards that the opponent can afford to play
+// Go through hand and play cards that the opponent can afford to play
     for(int i = 0; i < opponentBoard.getHandSize(); i++){
         if(opponentBoard.getCardInHand(i)->getManaCost() <= opponentBoard.getMana()){
-            //opponentBoard.playCardFromHand(opponentBoard/*,i */);
             opponentBoard.playCardFromHand(i);
+            cout << "Played a card" << endl;
         }
-        renderBoard(playerBoard, opponentBoard);
+        opponentBoard.draw(5-opponentBoard.getHandSize());
     }
-   
-    // Attack with all creatures not exhausted
+    renderBoard(playerBoard, opponentBoard);
+// Attack with all creatures not exhausted
     for(int i = 0; i < opponentBoard.getFieldSize(); i++){
         if(!opponentBoard.getCardOnField(i)->isExhausted()){
-            // get target for attack
-            // look through all cards on player's board. If the card is capable of killing one of those, it will chose the first one as its target
+            cout << "attack" << endl;
+// get target for attack
+// look through all cards on player's board. If the card is capable of killing one of those, it will chose the first one as its target
             int targetIndex = -1;
             for(int j = 0; j < playerBoard.getFieldSize(); j++){
-                if(opponentBoard.getCardOnField(i)->getAttack() > opponentBoard.getCardOnField(j)->getDefense()){
+                if(opponentBoard.getCardOnField(i)->getAttack() >
+                   opponentBoard.getCardOnField(j)->getDefense()){
                     targetIndex = j;
                     break;
                 }
             }
             if(targetIndex != -1){
-                // destory creature
-                cout << "Opponent's " << opponentBoard.getCardOnField(i)->getName() << " destoryed your " << playerBoard.getCardOnField(targetIndex)->getName() << "!" << endl;
+// destory creature
+                cout << "Opponent's " <<
+                     opponentBoard.getCardOnField(i)->getName() << " destoryed your " <<
+                     playerBoard.getCardOnField(targetIndex)->getName() << "!" << endl;
                 playerBoard.discardCardFromField(targetIndex);
                 renderBoard(playerBoard, opponentBoard);
             } else {
-                // opponent's creature attacks player directly
-                cout << "Opponent's " << opponentBoard.getCardOnField(i)->getName() << " attacks you directly for " << opponentBoard.getCardOnField(i)->getAttack() << " damage!" << endl;
-                playerBoard.setHP(playerBoard.getHP() - opponentBoard.getCardOnField(i)->getAttack());
+// opponent's creature attacks player directly
+                cout << "Opponent's " <<
+                     opponentBoard.getCardOnField(i)->getName() << " attacks you directly for "
+                     << opponentBoard.getCardOnField(i)->getAttack() << " damage!" << endl;
+                playerBoard.setHP(playerBoard.getHP() -
+                                  opponentBoard.getCardOnField(i)->getAttack());
             }
         }
                 
