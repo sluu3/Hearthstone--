@@ -232,9 +232,9 @@ void getOpponentAction(Board & playerBoard, Board & opponentBoard){
                 }
             }
             if(targetIndex != -1){
-// destory creature
+// destroy creature
                 cout << "Opponent's " <<
-                     opponentBoard.getCardOnField(i)->getName() << " destoryed your " <<
+                     opponentBoard.getCardOnField(i)->getName() << " destroyed your " <<
                      playerBoard.getCardOnField(targetIndex)->getName() << "!" << endl;
                 playerBoard.discardCardFromField(targetIndex);
                 renderBoard(playerBoard, opponentBoard);
