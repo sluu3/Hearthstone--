@@ -1,4 +1,4 @@
-#include "cat.h"
+#include "animals.h"
 
 string Cat::render(int line){
     

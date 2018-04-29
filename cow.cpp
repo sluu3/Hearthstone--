@@ -1,4 +1,4 @@
-#include "cow.h"
+#include "animals.h"
 
 string Cow::render(int line){
     

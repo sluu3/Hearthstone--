@@ -1,4 +1,4 @@
-#include "giraffe.h"
+#include "animals.h"
 
 string Giraffe::render(int line){
     

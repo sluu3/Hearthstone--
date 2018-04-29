@@ -1,4 +1,4 @@
-#include "hedgehog.h"
+#include "animals.h"
 
 string Hedgehog::render(int line){
     

@@ -1,3 +1,4 @@
+
 #ifndef GOBLIN_H
 #define GOBLIN_H
 
@@ -7,11 +8,11 @@
 using namespace std;
 
 class Goblin : public Card {
-   // private:
-    
-    public:
+    // private:
+
+public:
     Goblin(void);
-    virtual string render(int);    
+    virtual string render(int);
 };
 
 #endif

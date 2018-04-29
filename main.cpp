@@ -3,18 +3,8 @@
 #include <cstdlib>
 #include <unistd.h>
 #include "board.h"
-#include "goblin.h"
-#include "bear.h"
-#include "frog.h"
-#include "giraffe.h"
-#include "hedgehog.h"
-#include "rabbit.h"
-#include "cow.h"
-#include "dog.h"
-#include "elephant.h"
-#include "cat.h"
-#include "pig.h"
 #include "card.h"
+#include "animals.h"
 
 using namespace std;
 
@@ -70,6 +60,7 @@ int main(int argc, char * arv[]){
 	    ob.setMaxMana(maxMana);
 	    if(turn){
             cout << "Your turn!" << endl;
+            pb.draw(5 - pb.getHandSize());
             renderBoard(pb, ob);
             pb.setMana(pb.getMana() + 1);
             pb.renderMana();
@@ -80,6 +71,7 @@ int main(int argc, char * arv[]){
 
         }else{
             ob.setMana(ob.getMana() + 1);
+            ob.draw(5 - ob.getHandSize());
             cout << "Opponents turn!" << endl;
             getOpponentAction(pb, ob);
             turn = true;
@@ -98,20 +90,21 @@ void getPlayerAction(Board& pb, Board& ob){
 	while(i != 2) {
         cout << "0: Play card from hand" << endl << "1: Attack with Creature" << endl << "2: End Turn" << endl;
         cin >> i;
-        pb.draw(5 - pb.getHandSize());
 
         if (i == 0) {
             pb.showHand();
-            cout << "What card to play?";
+            cout << "What card to play (100 to go back)? ";
             cin >> j;
-            while (j >= pb.getHandSize()){
+            while (j >= pb.getHandSize() && j != 100){
                 cout << "Invalid choice. Choose again: ";
                 cin >> j;
             }
-            if (pb.getCardInHand(j)->getManaCost() <= pb.getMana()) {
-                pb.playCardFromHand(j);
-            }else {
-                cout << "You don't have enough mana" << endl;
+            if (j != 100){
+                if (pb.getCardInHand(j)->getManaCost() <= pb.getMana()) {
+                    pb.playCardFromHand(j);
+                }else {
+                    cout << "You don't have enough mana" << endl;
+                }
             }
 
             renderBoard(pb, ob);
@@ -119,39 +112,43 @@ void getPlayerAction(Board& pb, Board& ob){
             cout << "HP: " << pb.getHP() << " Opponent's HP: " << ob.getHP() << endl;
 
         } else if (i == 1) {
-            cout << "Card to attack opponent's creature: ";
-            pb.showField();
-            cin >> j;
-            while(j >= pb.getFieldSize()){
-                cout << "Invalid choice. Choose again." << endl;
+            if (pb.getFieldSize() > 0){
+                cout << "Card to attack opponent's creature: ";
+                pb.showField();
                 cin >> j;
-            }
-            if (!pb.getCardOnField(j)->isExhausted()) {
-                cout << "Who/what to attack: ";
-                ob.showField();
-                cout << "100: Attack opponent directly.";
-                cin >> attack;
-                while(attack >= ob.getFieldSize() && attack != 100){
+                while(j >= pb.getFieldSize()){
                     cout << "Invalid choice. Choose again." << endl;
+                    cin >> j;
+                }
+                if (!pb.getCardOnField(j)->isExhausted()) {
+                    cout << "Who/what to attack: ";
+                    ob.showField();
+                    cout << "100: Attack opponent directly.";
                     cin >> attack;
-                }
+                    while(attack >= ob.getFieldSize() && attack != 100){
+                        cout << "Invalid choice. Choose again." << endl;
+                        cin >> attack;
+                    }
 
-                if (attack != 100 && pb.getCardOnField(j)->getAttack() > ob.getCardOnField(attack)->getDefense()) {
-                    cout << "Your " << pb.getCardOnField(j)->getName() << " destroyed the enemies " << ob.getCardOnField(attack)->getName()
-                         << endl;
-                    ob.discardCardFromField(attack);
+                    if (attack != 100 && pb.getCardOnField(j)->getAttack() > ob.getCardOnField(attack)->getDefense()) {
+                        cout << "Your " << pb.getCardOnField(j)->getName() << " destroyed the enemies " << ob.getCardOnField(attack)->getName()
+                             << endl;
+                        ob.discardCardFromField(attack);
+                    }
+                    else if(attack == 100){
+                        cout << "You attack the opponent directly." << endl;
+                        ob.setHP(ob.getHP() - pb.getCardOnField(j)->getAttack());
+                        cout << "The opponent's HP is now: " << ob.getHP() << endl;
+                    }
+                    pb.attacked(j); //Decreases the mana
+                    renderBoard(pb, ob);
+                    pb.renderMana();
+                    cout << "HP: " << pb.getHP() << " Opponent's HP: " << ob.getHP() << endl;
+                } else {
+                    cout << "This creature is exhausted, pick again." << endl;
                 }
-                else if(attack == 100){
-                    cout << "You attack the opponent directly." << endl;
-                    ob.setHP(ob.getHP() - pb.getCardOnField(j)->getAttack());
-                    cout << "The opponent's HP is now: " << ob.getHP() << endl;
-                }
-                pb.attacked(j); //Decreases the mana
-                renderBoard(pb, ob);
-                pb.renderMana();
-                cout << "HP: " << pb.getHP() << " Opponent's HP: " << ob.getHP() << endl;
-            } else {
-                cout << "This creature is exhausted, pick again." << endl;
+            }else{
+                cout << "You do not have any cards in your hand." << endl;
             }
         } else if (i != 0 && i != 1 && i != 2) {
             cout << "Invalid choice. Choose again." << endl;
@@ -208,7 +205,7 @@ void renderBoard(Board & pb, Board & ob){
 void getOpponentAction(Board & playerBoard, Board & opponentBoard){
 
 // Go through hand and play cards that the opponent can afford to play
-    opponentBoard.draw(5-opponentBoard.getHandSize());
+
     for(int i = 0; i < opponentBoard.getHandSize(); i++){
         if(opponentBoard.getCardInHand(i)->getManaCost() <= opponentBoard.getMana()){
             opponentBoard.playCardFromHand(i);
@@ -232,9 +229,9 @@ void getOpponentAction(Board & playerBoard, Board & opponentBoard){
                 }
             }
             if(targetIndex != -1){
-// destroy creature
+// destory creature
                 cout << "Opponent's " <<
-                     opponentBoard.getCardOnField(i)->getName() << " destroyed your " <<
+                     opponentBoard.getCardOnField(i)->getName() << " destoryed your " <<
                      playerBoard.getCardOnField(targetIndex)->getName() << "!" << endl;
                 playerBoard.discardCardFromField(targetIndex);
                 renderBoard(playerBoard, opponentBoard);

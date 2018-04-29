@@ -1,4 +1,4 @@
-#include "goblin.h"
+#include "animals.h"
 
 string Goblin::render(int line){
     
