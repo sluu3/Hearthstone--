@@ -5,7 +5,7 @@ string Cat::render(int line){
     switch(line){
         case 0: return ".___________.";
         case 1: return "|    Cat    |";
-        case 2: return "|   |\_/|   |";
+        case 2: return "|   |\\_/|   |";
         case 3: return "|   'o.o'   |";
         case 4: return "|   =(_)=   |";
         case 5: return "|     U     |";

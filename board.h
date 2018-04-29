@@ -57,7 +57,8 @@ class Board{
         Card* showHand();
         void setMaxMana(int);
         Card* showField();
-        
+        Card* attacked(int);
+
         /* draw
          *
          * This function pops a Card pointer off of the deck vector and 
@@ -123,7 +124,7 @@ class Board{
          *
          * Mutator function for mana.
          */
-        void incMana(void);
+        void setMana(int);
         
         /* discardCardFromField
          *

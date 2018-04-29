@@ -5,10 +5,10 @@ string Giraffe::render(int line){
     switch(line){
         case 0: return ".___________.";
         case 1: return "|  Giraffe  |";
-        case 2: return "|   ^_^     |";
-        case 3: return "|   /////   |";
-        case 4: return "|    ----   |";
-        case 5: return "|     | |   |";
+        case 2: return "|    /)/)   |";
+        case 3: return "|   (. .\\   |";
+        case 4: return "|   /'-._)  |";
+        case 5: return "|  /#/      |";
         case 6: return "|   200/100 |";
         case 7: return "|___________|";
         default:
@@ -16,6 +16,6 @@ string Giraffe::render(int line){
     }
 }
 
-Giraffe::Giraffe(void):Card("Giraffe", 1, 200, 100){
+Giraffe::Giraffe(void):Card("Giraffe", 2, 200, 100){
 	return;
 }

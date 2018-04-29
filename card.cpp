@@ -41,10 +41,10 @@ int Card::getDefense(){
     return defense;
 }
 
-bool Card::isExhausted(){   //DOUBLE CHECK
+bool Card::isExhausted(){
     return exhausted;   
 }
 
-void Card::unExhaust(){      //DOUBLE CHECK
+void Card::unExhaust(){
     exhausted = false;
 }
