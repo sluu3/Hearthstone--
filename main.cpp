@@ -134,11 +134,17 @@ void getPlayerAction(Board& pb, Board& ob){
                         cout << "Your " << pb.getCardOnField(j)->getName() << " destroyed the enemies " << ob.getCardOnField(attack)->getName()
                              << endl;
                         ob.discardCardFromField(attack);
+			pb.getCardOnField(j)->reExhaust;
                     }
                     else if(attack == 100){
                         cout << "You attack the opponent directly." << endl;
+			pb.getCardOnField(j)->reExhaust();
                         ob.setHP(ob.getHP() - pb.getCardOnField(j)->getAttack());
                         cout << "The opponent's HP is now: " << ob.getHP() << endl;
+			    if(ob.getHP() <= 0){
+				    cout << "Congratulations, you won!" << endl;
+				    break;
+			    }
                     }
                     pb.attacked(j); //Decreases the mana
                     renderBoard(pb, ob);
