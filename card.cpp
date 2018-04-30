@@ -49,6 +49,6 @@ void Card::unExhaust(){
     exhausted = false;
 }
 
-void Card::reExhaust(){
+void Card::reExhaust() {
     exhausted = true;
 }

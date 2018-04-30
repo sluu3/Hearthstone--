@@ -137,7 +137,6 @@ void getPlayerAction(Board& pb, Board& ob){
                             break;
                         }
                     }
-                    pb.attacked(j); //Decreases the mana
                     renderBoard(pb, ob);
                 } else {
                     cout << "This creature is exhausted, pick again." << endl;

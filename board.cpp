@@ -40,9 +40,7 @@ void Board::draw(int num){
     }
 }
 
-Card* Board::attacked(int j) {
-    mana -= field[j]->getManaCost();
-}
+
 
 void Board::playCardFromHand(int indx){
     Card* temp = hand[indx];
@@ -60,7 +58,7 @@ Card* Board::getCardInHand(int indx){
 }
 
 int Board::getHP(){
-    return hp;   
+    return hp;
 }
 
 void Board::setHP(int n){

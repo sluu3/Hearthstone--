@@ -57,7 +57,6 @@ class Board{
         Card* showHand();
         void setMaxMana(int);
         Card* showField();
-        Card* attacked(int);
 
         /* draw
          *
