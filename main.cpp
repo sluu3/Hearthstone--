@@ -216,7 +216,7 @@ void getOpponentAction(Board & playerBoard, Board & opponentBoard){
             int targetIndex = -1;
             for(int j = 0; j < playerBoard.getFieldSize(); j++){
                 if(opponentBoard.getCardOnField(i)->getAttack() >
-                   opponentBoard.getCardOnField(j)->getDefense()){
+                   playerBoard.getCardOnField(j)->getDefense()){
                     targetIndex = j;
                     break;
                 }
