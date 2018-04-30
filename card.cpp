@@ -48,3 +48,7 @@ bool Card::isExhausted(){
 void Card::unExhaust(){
     exhausted = false;
 }
+
+void Card::reExhaust(){
+    exhausted = true;
+}
