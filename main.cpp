@@ -14,7 +14,7 @@ void randomCards(Card*&, int);
 void getPlayerAction(Board&, Board&);
 
 int main(int argc, char * arv[]){
-    int c, coin, maxMana = 1;
+    int c, r, coin, maxMana = 1;
 	bool turn;
     srand(time(0));
 
@@ -23,9 +23,9 @@ int main(int argc, char * arv[]){
     // Create player deck and draw initial hand here:
 
     for (int i = 0; i < 20; i++){
-        c = rand() % 11;
+        r = rand() % 11;
         Card* cards;
-        randomCards(cards, c);
+        randomCards(cards, r);
         pb.addToDeckList(cards);
     }
     pb.draw(5);
@@ -73,6 +73,7 @@ int main(int argc, char * arv[]){
         }
 
     }
+
 
 }
 
@@ -239,4 +240,13 @@ void getOpponentAction(Board & playerBoard, Board & opponentBoard){
         }
 
     }
+
+    for (int i = 0; i < opponentBoard.getFieldSize(); i++){
+        opponentBoard.getCardOnField(i)->unExhaust();
+    }
+
+    if (playerBoard.getHP() <= 0 && opponentBoard.getHP() > 0) {
+        cout << "Sorry you lost ):" << endl;
+    }
+
 }
